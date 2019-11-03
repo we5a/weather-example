@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { WeatherService } from 'src/app/services/weather.service';
 import { Forecast } from 'src/app/models/forecast.model';
-import { Weather } from 'src/app/models/weather.model';
 import * as moment from 'moment';
 
 @Component({
