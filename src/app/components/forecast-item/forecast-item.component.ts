@@ -19,7 +19,7 @@ export class ForecastItemComponent implements OnInit {
         this.currentWeather = forecast;
         
 
-        console.log('cW', this.currentWeather);
+       // console.log('cW', this.currentWeather);
       }
     });
   }
