@@ -118,16 +118,15 @@ export class WeatherService {
   getCountryDetails(lat: string, lng: string) {     //get country details -> 1 additional query, optional
     const url = 'https://maps.googleapis.com/maps/api/geocode/json';
 
-       const params = new HttpParams()
-         .set('latlng', `${lat},${lng}`)
-         .set('key', environment.geocodingKey);
+    const params = new HttpParams()
+      .set('latlng', `${lat},${lng}`)
+      .set('key', environment.geocodingKey);
 
-      this.http.get<any>(url, { params }).subscribe(res => {
-        let dd =  res.plus_code.compound_code.split(' ');
-        dd.shift();
-
-        this.countryDetails.next(dd.join(' '));
-      });
+    this.http.get<any>(url, { params }).subscribe(res => {
+      let cDet = res.plus_code.compound_code.split(' ');
+      cDet.shift();
+      this.countryDetails.next(cDet.join(' '));
+    });
   }
 
   changeLocation(location: string) {
@@ -136,12 +135,9 @@ export class WeatherService {
       .set('address', location)
       .set('key', environment.geocodingKey);
     this.http.get<any>(URL, { params }).subscribe(res => {
-      console.log('res main', res);
-      console.log('city name', res.results[0].address_components[0].long_name);
       const lat: string = res.results[0].geometry.location.lat.toString();
       const lng: string = res.results[0].geometry.location.lng.toString();
 
-      
       this.getCurrentForecast(lat, lng).subscribe(f => {
         this.currentWeather.next(f[0]);
         this.city.next(f[0].city_name);

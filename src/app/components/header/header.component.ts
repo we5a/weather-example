@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
   }
 
   goToMainPage(){
-   this.router.navigate(['/']);
+    document.location.reload();
   }
 
   clickMoreAction(){
