@@ -24,12 +24,27 @@ export class WeatherService {
       this.defineCurrentWeather();
     });
 
-    // this.get15daysForecast().subscribe(forecast => {
-    //   this.twoWeeksForecast.next(forecast);
-    //   console.log(forecast);
-    // });
+    this.defineTwoWeeksWeather();
   }
 
+  defineTwoWeeksWeather() {
+    const local = JSON.parse(localStorage.getItem('twoWeeksWeather'));
+    const today = moment().format('YYYY-MM-DD');
+    if(!!local){
+      const updated = local.lastUpdated;
+      if(updated === today){
+        this.twoWeeksForecast.next(local.forecast);
+        console.log('2 weeks from local');
+        return;
+      }
+    }
+    this.get15daysForecast().subscribe(forecast=> {
+      this.twoWeeksForecast.next(forecast);
+      const localTwoWeeksWeather = JSON.stringify({lastUpdated: today, forecast: this.twoWeeksForecast.value});
+      localStorage.setItem('twoWeeksWeather', localTwoWeeksWeather);
+      console.log('2 weeks from remote');
+    });
+  }
 
   defineCurrentWeather() {
     const local = JSON.parse(localStorage.getItem('currentWeather'));
