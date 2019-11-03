@@ -1,2 +1,4 @@
-
-<app-forecast-item *ngFor="let item of twoWeeksForecast"></app-forecast-item>
+<app-forecast-item
+ *ngFor="let item of twoWeeksForecast"
+ [forecast]="item"
+ ></app-forecast-item>

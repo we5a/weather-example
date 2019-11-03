@@ -1,0 +1,12 @@
+.description, .temperature {
+  white-space: nowrap;
+}
+
+[class^="col"] {
+  font-size: 1.3em;
+
+  span {
+    font-size: 0.65em;
+  }
+}
+

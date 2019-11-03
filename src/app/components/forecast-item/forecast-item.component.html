@@ -1,6 +1,11 @@
-<div *ngIf="currentWeather" class="row">
-    <div class="col">{{currentWeather.city_name}}</div>
-    <div class="col"> Temp {{currentWeather.temp}}</div>
-    <div class="col"> Wind {{currentWeather.wind_spd}} {{currentWeather.wind_cdir_full}}</div>
-    <div *ngIf="currentWeather" class="col">{{currentWeather.weather.description}}</div>
+<div  class="row d-flex flex-row align-items-center px-3">
+    <div class="col-auto mr-2">{{date}}</div>
+    <div class="col-auto"> 
+        <img src="../../../assets/img/icons/{{forecast.weather.icon}}.png" alt="icon" height="100"  >
+    </div>
+    <div class="col description">{{forecast.weather.description}}</div>
+    <div class="col temperature"><span>Day:</span> {{forecast.high_temp}} &#8451; &nbsp;&nbsp;&nbsp; <span>Night:</span> {{forecast.low_temp}} &#8451;</div>
+    <div class="col"><span>Wind:</span> {{windSpeed}} <span>m/s</span></div>
+    <div class="col"><span>Pres:</span> {{pressure}} <span>mmhg</span></div>
 </div>
+<hr class="mx-3" />

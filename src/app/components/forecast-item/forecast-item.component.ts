@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { WeatherService } from 'src/app/services/weather.service';
 import { Forecast } from 'src/app/models/forecast.model';
 import { Weather } from 'src/app/models/weather.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-forecast-item',
@@ -9,19 +10,19 @@ import { Weather } from 'src/app/models/weather.model';
   styleUrls: ['./forecast-item.component.scss']
 })
 export class ForecastItemComponent implements OnInit {
-  currentWeather: Forecast;
-  
+  @Input() forecast: Forecast;
+  date: string;
+  pressure: number;
+  windSpeed: number;
+
   constructor(private weatherSerivice: WeatherService) { }
-
+  
   ngOnInit() {
-    this.weatherSerivice.currentWeather.subscribe(forecast=>{
-      if (forecast){
-        this.currentWeather = forecast;
-        
-
-       // console.log('cW', this.currentWeather);
-      }
-    });
+    if(this.forecast){
+      this.date = moment(this.forecast.datetime, "YYYY-MM-DD").format("DD.MM");
+      this.pressure = Math.round(this.forecast.pres);
+      this.windSpeed = Math.round(this.forecast.wind_spd * 10) / 10;
+    }
   }
 
 }

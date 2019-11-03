@@ -13,7 +13,7 @@ import * as moment from 'moment';
 export class WeatherService {
   city = 'Lviv';
   country = 'Ukraine';
-  language = 'uk';
+  language = 'en';
   CURRENT_WEATHER_UPDATE_PERIOD = 7200;
   currentWeather = new BehaviorSubject<Forecast>(null);
   twoWeeksForecast = new BehaviorSubject<Forecast[]>(null);
@@ -56,6 +56,7 @@ export class WeatherService {
         return;
       }
     }
+
     this.getCurrentForecast().subscribe(forecast => {
       this.currentWeather.next(forecast[0]);
       const ts = moment().unix();
@@ -95,6 +96,6 @@ export class WeatherService {
       res.data.shift();
       return res.data;
     }));
-
   }
+
 }
