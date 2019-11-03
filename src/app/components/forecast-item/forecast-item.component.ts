@@ -19,7 +19,7 @@ export class ForecastItemComponent implements OnInit {
   ngOnInit() {
     if(this.forecast){
       this.date = moment(this.forecast.datetime, "YYYY-MM-DD").format("DD.MM");
-      this.pressure = Math.round(this.forecast.pres);
+      this.pressure = Math.round(this.forecast.pres / 1.333);
       this.windSpeed = Math.round(this.forecast.wind_spd * 10) / 10;
     }
   }

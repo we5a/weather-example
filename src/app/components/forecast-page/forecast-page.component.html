@@ -3,40 +3,43 @@
         <div *ngIf="currentWeather" class="col">
 
             <div class="location d-flex justify-content-between align-items-center">
-                <h3 class="">{{currentCity}}</h3>
+                <div>
+                    <h3 class="">{{currentCity}}</h3>
+                    <span class="d-none d-md-block">{{countryDetail}}</span>
+                </div>
                 <div>
                     <input class="p-1" #inputLocation="ngModel" [(ngModel)]="location" type="text"
                         placeholder="change location" name="locations">
                     <fa-icon class="m-2 search-icon" (click)="onSubmit()" [icon]="faSearchLocation"></fa-icon>
                 </div>
             </div>
-
-
-            <div>
+            
+            
+            <div class="forecast-container shadow">
                 <tabset>
                     <tab>
                         <ng-template tabHeading>
-                            Today
+                           <span class="font-weight-bold">Today</span> 
                         </ng-template>
                         <div class="row">
-                            <div class="col d-flex flex-column justify-content-start align-items-center  ">
+                            <div class="col-sm-12 col-md-3 d-flex flex-column justify-content-start align-items-center">
                                 <img *ngIf="currentWeather"
-                                    src="../../../assets/img/icons/{{currentWeather.weather.icon}}.png">
-                                <div class="font-weight-bold">
+                                src="../../../assets/img/icons/{{currentWeather.weather.icon}}.png">
+                                <div class="descr">
                                     {{currentWeather.weather.description}}
                                 </div>
                             </div>
-                            <div class="col d-flex flex-column justify-content-start align-items-center">
+                            <div class="col-sm-12 col-md-3 d-flex flex-column justify-content-start align-items-center">
                                 <div class="main-indicators">
                                     {{currentWeather.temp}} &#8451;
                                 </div>
                                 <div>
                                     <span class="suppl-indicators">{{currentWeather.wind_spd.toFixed(1)}}
                                         m/s</span><br />
-                                    {{currentWeather.wind_cdir_full}} wind
+                                        {{currentWeather.wind_cdir_full}} wind
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col d-flex flex-column justify-content-start align-items-center">
+                            <div class="col-sm-6 col-md-3 d-flex flex-column justify-content-start align-items-center">
                                 <div>
                                     <span class="main-indicators">{{pressure}}<sub>mmhg</sub></span>
                                 </div>
@@ -44,7 +47,7 @@
                                     <span class="suppl-indicators">{{this.currentWeather.rh}} %</span> humidity
                                 </div>
                             </div>
-                            <div class="col d-flex flex-column justify-content-start align-items-center">
+                            <div class="col-sm-6 col-md-3 d-flex flex-column justify-content-start align-items-center">
                                 <div>
                                     <span class="suppl-indicators">{{sunrise}}</span> sunrise
                                 </div>
@@ -56,7 +59,7 @@
                     </tab>
                     <tab>
                         <ng-template tabHeading>
-                            2 Weeks
+                            <span class="font-weight-bold">2 Weeks</span>
                         </ng-template>
                         <app-forecast-list></app-forecast-list>
                     </tab>
@@ -65,5 +68,3 @@
         </div>
     </div>
 </div>
-
-<!-- <app-forecast-list></app-forecast-list> -->

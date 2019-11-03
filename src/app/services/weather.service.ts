@@ -14,7 +14,7 @@ import { CoordPosition } from '../models/position.model';
 export class WeatherService {
   city = new BehaviorSubject<string>(null);
   position: CoordPosition;
-  country = 'Ukraine';
+  countryDetails = new BehaviorSubject<string>(null);
   language = 'en';
   CURRENT_WEATHER_UPDATE_PERIOD = 7200;
   currentWeather = new BehaviorSubject<Forecast>(null);
@@ -115,23 +115,19 @@ export class WeatherService {
     }));
   }
 
-  getYourCity() {
+  getCountryDetails(lat: string, lng: string) {     //get country details -> 1 additional query, optional
     const url = 'https://maps.googleapis.com/maps/api/geocode/json';
 
-    this.getYourPosition().subscribe(res => {
-      let lat = res.lat.toFixed(8);
-      let lng = res.lng.toFixed(8);
-      console.log('lat-lng', lat, lng);
-
-      const params = new HttpParams()
-        .set('latlng', `${lat},${lng}`)
-        .set('key', environment.geocodingKey);
+       const params = new HttpParams()
+         .set('latlng', `${lat},${lng}`)
+         .set('key', environment.geocodingKey);
 
       this.http.get<any>(url, { params }).subscribe(res => {
-        console.log('maybe your res city', res);
-      });
-    });
+        let dd =  res.plus_code.compound_code.split(' ');
+        dd.shift();
 
+        this.countryDetails.next(dd.join(' '));
+      });
   }
 
   changeLocation(location: string) {
@@ -140,14 +136,16 @@ export class WeatherService {
       .set('address', location)
       .set('key', environment.geocodingKey);
     this.http.get<any>(URL, { params }).subscribe(res => {
-
+      console.log('res main', res);
       console.log('city name', res.results[0].address_components[0].long_name);
       const lat: string = res.results[0].geometry.location.lat.toString();
       const lng: string = res.results[0].geometry.location.lng.toString();
 
+      
       this.getCurrentForecast(lat, lng).subscribe(f => {
         this.currentWeather.next(f[0]);
         this.city.next(f[0].city_name);
+        this.countryDetails.next(res.results[0].formatted_address)
       });
 
       this.get15daysForecast(lat, lng).subscribe(f => {
