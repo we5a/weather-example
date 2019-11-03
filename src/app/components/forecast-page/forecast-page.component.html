@@ -1,8 +1,63 @@
 <div class="container">
     <div class="row">
-        <div class="col">
-            <h3>Current forecast</h3>
-            <div>Our temperature {{temp}}</div>
+        <div *ngIf="currentWeather" class="col">
+            <h3 class="text-center">{{currentWeather.city_name}}</h3>
+            <div>
+                <tabset>
+                    <tab>
+                        <ng-template tabHeading>
+                            Today
+                        </ng-template>
+                        <div class="row">
+                            <div class="col d-flex flex-column justify-content-start align-items-center  ">
+                                <img *ngIf="currentWeather"
+                                    src="../../../assets/img/icons/{{currentWeather.weather.icon}}.png">
+                                <div class="font-weight-bold">
+                                    {{currentWeather.weather.description}}
+                                </div>
+                            </div>
+                            <div class="col d-flex flex-column justify-content-start align-items-center">
+                                <div class="main-indicators">
+                                    {{currentWeather.temp}} &#8451;
+                                </div>
+                                <div>
+                                    <span class="suppl-indicators">{{currentWeather.wind_spd.toFixed(1)}}
+                                        m/s</span><br />
+                                    {{currentWeather.wind_cdir_full}} wind
+                                </div>
+                            </div>
+                            <div class="col d-flex flex-column justify-content-start align-items-center">
+                                <div>
+                                    <span class="main-indicators">{{pressure}}<sub>mmhg</sub></span>
+                                </div>
+                                <div>
+                                    <span class="suppl-indicators">{{this.currentWeather.rh}} %</span> humidity
+                                </div>
+                            </div>
+                            <div class="col d-flex flex-column justify-content-start align-items-center">
+                                <div>
+                                    <span class="suppl-indicators">{{sunrise}}</span> sunrise
+                                </div>
+                                <div>
+                                    <span class="suppl-indicators">{{sunset}}</span> sunset
+                                </div>
+                            </div>
+                        </div>
+                    </tab>
+                    <tab>
+                        <ng-template tabHeading>
+                            Tomorrow
+                        </ng-template>
+                        Tomorrow weather
+                    </tab>
+                    <tab>
+                        <ng-template tabHeading>
+                            Forecast 16 days
+                        </ng-template>
+                        16 day Weather
+                    </tab>
+                </tabset>
+            </div>
         </div>
     </div>
 </div>

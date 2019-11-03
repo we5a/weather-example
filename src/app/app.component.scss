@@ -1,18 +1,18 @@
-@import '../assets/styles/variables.scss';
+@import "../assets/styles/variables.scss";
 
-.app-body{
-    min-height: 100vh;
-    width: 100%;
-    background-color: $base-color-background;
+.app-body {
+  width: 100%;
+  background-color: $base-color-background;
+  border: 1px solid red;
 
-    .header{
-        height: 100px;
-        background-color: $base-header-background;
-    }
-    .col {
-        padding: 0;
-    }
-    .row {
-        margin: 0;
-    }
+  .header {
+    height: 100px;
+    background-color: $base-header-background;
+  }
+  .col {
+    padding: 0;
+  }
+  .row {
+    margin: 0;
+  }
 }

@@ -1,1 +1,7 @@
 <p>forecast-item works!</p>
+<div *ngIf="currentWeather" class="row">
+    <div class="col">{{currentWeather.city_name}}</div>
+    <div class="col"> Temp {{currentWeather.temp}}</div>
+    <div class="col"> Wind {{currentWeather.wind_spd}} {{currentWeather.wind_cdir_full}}</div>
+    <div *ngIf="currentWeather" class="col">{{currentWeather.weather.description}}</div>
+</div>

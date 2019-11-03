@@ -1,3 +1,5 @@
+import { Weather } from './weather.model';
+
 export class Forecast {
     constructor(
         public wind_cdir: string,
@@ -17,11 +19,7 @@ export class Forecast {
         public ts: number,
         public h_angle: number,
         public dewpt: number,
-        public weather: {
-            icon: string,
-            code: number,
-            description: string
-        },
+        public weather: Weather,
         public uv: number,
         public aqi: number,
         public station: string,

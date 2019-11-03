@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@import './assets/styles/variables.scss';
+
+body{
+    margin: 0;
+    padding: 0;
+    overflow-y: scroll;
+    background-color: $base-color-background;
+    font-size: 1.2em;
+}

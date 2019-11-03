@@ -11,6 +11,7 @@ import { ForecastListComponent } from './components/forecast-list/forecast-list.
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { WeatherService } from './services/weather.service';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { WeatherService } from './services/weather.service';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    TabsModule.forRoot()
   ],
   providers: [WeatherService],
   bootstrap: [AppComponent]
