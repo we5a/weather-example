@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=McLaren&display=swap');
+@import '../../../assets/styles/variables.scss';
 
 .logo {
     cursor: pointer;
@@ -6,7 +7,7 @@
     .title {
         font-family: 'McLaren', cursive;
         font-size: 1.9em;
-         color:#f5811f;
+         color: $logo-title-color;
     }
 
 

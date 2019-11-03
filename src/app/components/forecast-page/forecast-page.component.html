@@ -1,7 +1,17 @@
 <div class="container">
     <div class="row">
         <div *ngIf="currentWeather" class="col">
-            <h3 class="text-center">{{currentWeather.city_name}}</h3>
+
+            <div class="location d-flex justify-content-between align-items-center">
+                <h3 class="">{{currentCity}}</h3>
+                <div>
+                    <input class="p-1" #inputLocation="ngModel" [(ngModel)]="location" type="text"
+                        placeholder="change location" name="locations">
+                    <fa-icon class="m-2 search-icon" (click)="onSubmit()" [icon]="faSearchLocation"></fa-icon>
+                </div>
+            </div>
+
+
             <div>
                 <tabset>
                     <tab>
@@ -43,12 +53,6 @@
                                 </div>
                             </div>
                         </div>
-                    </tab>
-                    <tab>
-                        <ng-template tabHeading>
-                            Tomorrow
-                        </ng-template>
-                        Tomorrow weather
                     </tab>
                     <tab>
                         <ng-template tabHeading>
