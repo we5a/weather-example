@@ -3,8 +3,6 @@ import { WeatherService } from 'src/app/services/weather.service';
 import { Forecast } from 'src/app/models/forecast.model';
 import * as moment from 'moment';
 import { HttpClient } from '@angular/common/http';
-import { HttpParams } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { fas, faSearchLocation } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 

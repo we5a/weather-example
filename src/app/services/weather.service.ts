@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { BehaviorSubject, timer } from 'rxjs';
+import * as moment from 'moment';
+
 import { ForecastResponse } from '../models/forecastResponse.model';
 import { Forecast } from '../models/forecast.model';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { timer } from 'rxjs';
-import * as moment from 'moment';
+import { environment } from 'src/environments/environment';
 import { CoordPosition } from '../models/position.model';
 
 @Injectable()
@@ -40,7 +40,6 @@ export class WeatherService {
       const updated = local.lastUpdated;
       if (updated === today) {
         this.twoWeeksForecast.next(local.forecast);
-        console.log('2 weeks from local');
         return;
       }
     }
@@ -48,7 +47,6 @@ export class WeatherService {
       this.twoWeeksForecast.next(forecast);
       const localTwoWeeksWeather = JSON.stringify({ lastUpdated: today, forecast: this.twoWeeksForecast.value });
       localStorage.setItem('twoWeeksWeather', localTwoWeeksWeather);
-      console.log('2 weeks from remote');
     });
   }
 
@@ -59,7 +57,6 @@ export class WeatherService {
       if (updatedAgo <= this.CURRENT_WEATHER_UPDATE_PERIOD) {
         this.currentWeather.next(local.forecast);
         this.city.next(local.city);
-        console.log('from local');
         return;
       }
     }
@@ -70,7 +67,6 @@ export class WeatherService {
       const ts = moment().unix();
       const localCurrentWeather = JSON.stringify({ lastUpdated: ts, city: this.city.value, forecast: this.currentWeather.value });
       localStorage.setItem('currentWeather', localCurrentWeather);
-      console.log('from remote');
     },
       error => {
         this.currentWeather.next(local.forecast);
