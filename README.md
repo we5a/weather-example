@@ -5,6 +5,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## To run project
 
 In your project folder:
+
 $ git clone https://github.com/we5a/weather-example.git
 
 Then install all packages
